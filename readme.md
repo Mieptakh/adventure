@@ -63,7 +63,9 @@ itinerary → Jadwal perjalanan
 
 ✨ Untuk menambah paket baru → copy-paste blok di atas lalu sesuaikan.
 
-📝 4. Ubah Konten Teks Statis
+---
+
+## 📝 4. Ubah Konten Teks Statis
 
 📍 Lokasi teks di file index.html:
 
@@ -75,7 +77,9 @@ Safety & Process → <section id="safety">
 
 Testimoni → <blockquote>
 
-🖼️ 5. Atur Galeri Foto
+---
+
+##🖼️ 5. Atur Galeri Foto
 
 📍 Cari bagian <section id="gallery">
 Format foto:
@@ -91,7 +95,9 @@ URL_gambar_kecil → Thumbnail foto kecil
 
 data-caption → Judul / keterangan foto
 
-📲 6. Booking via WhatsApp
+---
+
+## 📲 6. Booking via WhatsApp
 
 Form booking sudah otomatis:
 
@@ -104,21 +110,28 @@ Chat otomatis terbuka ke WA Anda 📩
 ⚠️ Pastikan WHATSAPP_NUMBER sudah benar.
 🔗 Ada juga tombol Download Request → menyimpan detail booking .txt
 
-📥 7. Download Itinerary
+---
+
+## 📥 7. Download Itinerary
 
 Tiap paket → tombol Download Itinerary
 
 Menu atas → tombol Download All Itineraries
 📂 Semua file dalam format .txt
 
-🔍 8. Cek Website di Komputer
+---
+
+
+## 🔍 8. Cek Website di Komputer
 
 Klik kanan index.html → Open with Browser
 
 Atau drag-drop ke browser (Chrome/Firefox/Edge)
 ✨ Website langsung tampil tanpa server tambahan
 
-🌐 9. Publish Online (Opsional)
+---
+
+## 🌐 9. Publish Online (Opsional)
 
 Pilihan hosting:
 
@@ -128,7 +141,9 @@ Berbayar → cPanel (Niagahoster, Rumahweb, Hostinger, dll)
 
 📤 Upload file index.html + logo/gambar untuk online
 
-🗒️ 10. Ringkasan Cepat
+---
+
+## 🗒️ 10. Ringkasan Cepat
 
  Ubah data perusahaan → di window.ASC
 
@@ -142,12 +157,16 @@ Berbayar → cPanel (Niagahoster, Rumahweb, Hostinger, dll)
 
  Upload ke hosting (opsional)
 
-✨ Penutup
+ ---
+
+## ✨ Penutup
 
 🎉 Website siap digunakan!
 Klien dapat melihat paket, galeri, dan booking langsung via WhatsApp.
 
-💡 Tips profesional:
+---
+
+## 💡 Tips profesional:
 
 Gunakan foto asli kegiatan
 

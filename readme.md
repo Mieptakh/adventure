@@ -27,7 +27,9 @@ window.ASC = {
   LOGO_URL: 'https://.../logo.png'
 };
 
-🎒 3. Tambah & Edit Paket Pendakian
+---
+
+## 🎒 3. Tambah & Edit Paket Pendakian
 
 Semua paket ditulis dalam daftar PACKAGES
 

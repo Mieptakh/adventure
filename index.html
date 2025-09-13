@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ASC Adventure — Mountain & Outdoor Travel</title>
+  <meta name="description" content="ASC Adventure — Professional mountain travel & guided expeditions. Safe, experienced guides, curated routes, multi-day packages." />
+  <meta name="robots" content="index, follow" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ASC Adventure — Mountain & Outdoor Travel" />
+  <meta property="og:description" content="Guided mountain trips, experienced guides, safety-first, unforgettable summit experiences. Book now." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts & icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ascGreen: '#0b6b3a',
+            ascOlive: '#8f7a52',
+            ascNavy: '#062f4f',
+            ascSand: '#f5efe6'
+          },
+          fontFamily: {
+            serif: ['Playfair Display','serif'],
+            sans: ['Inter','sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Visual tweaks: bold + vintage vibe */
+    body { background: linear-gradient(180deg,#fbfaf8,#f5efe6); }
+    .hero-img { background: linear-gradient(180deg, rgba(6,47,79,0.45), rgba(6,47,79,0.45)), url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; }
+    .vintage-badge { background: linear-gradient(90deg,#8f7a52,#6c5a3a); color: #fff; padding: .25rem .6rem; border-radius: 999px; font-size: .75rem; }
+    .card { background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(2,6,23,0.06); }
+    .sepia { filter: saturate(.9) contrast(1.02) sepia(.12); }
+    .lightbox-bg { background: rgba(8,15,23,0.85); backdrop-filter: blur(4px); }
+    .rounded-frame { border: 8px solid rgba(245,239,230,0.9); box-shadow: 0 8px 30px rgba(6,47,79,0.12); }
+    @media (prefers-reduced-motion: no-preference) {
+      .floaty { animation: floaty 8s ease-in-out infinite; }
+      @keyframes floaty { 0%{transform: translateY(0)} 50%{transform: translateY(-8px)} 100%{transform: translateY(0)} }
+    }
+  </style>
+
+  <!-- Schema: TravelAgency + sample TouristTrip -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"TravelAgency",
+        "name":"ASC Adventure",
+        "url":"https://asc-adventure.example.com",
+        "logo":"https://asc-adventure.example.com/logo.png",
+        "contactPoint":[{"@type":"ContactPoint","telephone":"+6281234567890","contactType":"customer service","areaServed":"ID"}],
+        "sameAs":[]
+      },
+      {
+        "@type":"TouristTrip",
+        "name":"Summit Rinjani 3D/2N",
+        "description":"Guided Rinjani summit trip, includes porter & guide, camping, meals, and equipment list provided.",
+        "itinerary":"Day 1: Trek to basecamp. Day 2: Summit attempt. Day 3: Return & transfer.",
+        "touristType":"Adventure",
+        "offers":{"@type":"Offer","priceCurrency":"IDR","price":"2500000"}
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="text-ascNavy antialiased font-sans">
+
+  <!-- CONFIG: update these values -->
+  <script>
+    window.ASC = {
+      WHATSAPP_NUMBER: '6281234567890', // format international without plus
+      COMPANY_NAME: 'ASC Adventure',
+      EMAIL: 'hello@asc-adventure.example.com',
+      ADDRESS: 'Jl. Pendaki No.1, Bandung, Indonesia',
+      LOGO_URL: 'https://img.freepik.com/premium-vector/adventure-logo-badge-premium-template_278810-476.jpg'
+    };
+  </script>
+
+  <!-- NAV -->
+  <nav class="bg-white/90 sticky top-0 z-50 backdrop-blur border-b">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img id="ascLogo" src="" alt="ASC Adventure" class="w-12 h-12 rounded-md shadow-sm">
+        <div>
+          <div id="ascName" class="font-serif text-lg font-bold">ASC Adventure</div>
+          <div class="text-xs text-gray-500">Mountain • Trekking • Guiding</div>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-6">
+        <a href="#packages" class="hover:text-ascGreen">Paket</a>
+        <a href="#about" class="hover:text-ascGreen">Tentang</a>
+        <a href="#gallery" class="hover:text-ascGreen">Galeri</a>
+        <a href="#safety" class="hover:text-ascGreen">Safety</a>
+        <a href="#contact" class="hover:text-ascGreen">Booking</a>
+        <a id="btnDownload" class="bg-ascGreen text-white px-4 py-2 rounded shadow">Download Itinerary</a>
+      </div>
+
+      <div class="md:hidden flex items-center gap-3">
+        <button id="mobileToggle" class="p-2"><i class="fas fa-bars text-xl"></i></button>
+      </div>
+    </div>
+
+    <!-- mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-6 pb-4">
+      <a href="#packages" class="block py-2">Paket</a>
+      <a href="#about" class="block py-2">Tentang</a>
+      <a href="#gallery" class="block py-2">Galeri</a>
+      <a href="#contact" class="block py-2">Booking</a>
+      <a id="btnDownloadMobile" class="block mt-2 w-full bg-ascGreen text-white px-4 py-2 rounded text-center">Download Itinerary</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero-img text-white py-24">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <div class="vintage-badge">Ascend with Confidence</div>
+        <h1 id="mainTitle" class="text-3xl md:text-5xl font-serif font-bold mt-4 leading-tight">Explore the Heights — ASC Adventure</h1>
+        <p id="mainSubtitle" class="mt-4 text-lg max-w-prose">Guided mountain expeditions across Indonesia — Experienced guides, full safety gear, and curated itineraries for every level.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#packages" class="bg-ascGreen text-white px-5 py-3 rounded shadow font-semibold">Lihat Paket</a>
+          <a id="ctaWA" href="#" class="border border-white/40 px-5 py-3 rounded text-white">Booking via WhatsApp</a>
+        </div>
+
+        <div class="mt-6 flex gap-4 text-sm">
+          <div class="flex items-center gap-2"><i class="fas fa-user-check"></i> Licensed Guides</div>
+          <div class="flex items-center gap-2"><i class="fas fa-suitcase-rolling"></i> Full Support</div>
+          <div class="flex items-center gap-2"><i class="fas fa-first-aid"></i> Safety Equipment</div>
+        </div>
+      </div>
+
+      <div class="hidden md:flex justify-end">
+        <div class="rounded-frame overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="summit" class="w-full h-80 object-cover sepia">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="max-w-6xl mx-auto px-6 -mt-12">
+
+    <!-- PACKAGES -->
+    <section id="packages" class="card p-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-serif font-bold">Paket Pendakian & Adventure</h2>
+        <div class="text-sm text-gray-500">Choose a carefully curated trip — safety first, unforgettable views.</div>
+      </div>
+
+      <div class="mt-6 grid md:grid-cols-3 gap-6" id="packageGrid">
+        <!-- JS will render packages -->
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="mt-6 grid md:grid-cols-2 gap-6 items-center">
+      <div class="card p-6">
+        <h3 class="font-serif text-xl font-bold">Tentang ASC Adventure</h3>
+        <p class="mt-3 text-sm text-gray-700">ASC Adventure berdiri sejak 2015, fokus pada ekspedisi gunung dan pengalaman outdoor. Tim kami terdiri dari guide berlisensi, porter handal, dan staff logistik yang mengutamakan keselamatan serta kepuasan klien.</p>
+        <ul class="mt-4 text-sm text-gray-700 space-y-2">
+          <li>• Lebih dari 500 grup tersertifikasi</li>
+          <li>• SOP keselamatan & SOP cuaca</li>
+          <li>• Layanan kustom & corporate team building</li>
+        </ul>
+      </div>
+
+      <div class="card p-6">
+        <h3 class="font-serif text-xl font-bold">Kenapa Pilih Kami?</h3>
+        <div class="mt-3 space-y-3 text-sm text-gray-700">
+          <div class="flex gap-3 items-start"><div class="p-3 rounded bg-ascGreen text-white"><i class="fas fa-medal"></i></div><div><strong>Experienced Guides</strong><div class="text-xs text-gray-600">Guide tersertifikasi & rescue-trained.</div></div></div>
+          <div class="flex gap-3 items-start"><div class="p-3 rounded bg-ascGreen text-white"><i class="fas fa-map-signs"></i></div><div><strong>Route Planning</strong><div class="text-xs text-gray-600">Itinerary taktikal & acclimatization plan.</div></div></div>
+          <div class="flex gap-3 items-start"><div class="p-3 rounded bg-ascGreen text-white"><i class="fas fa-heart"></i></div><div><strong>Safety First</strong><div class="text-xs text-gray-600">PER & SOP untuk kondisi darurat.</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="mt-6 card p-6">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-serif font-bold">Galeri perjalanan</h3>
+        <div class="text-sm text-gray-500">Click to enlarge</div>
+      </div>
+
+      <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- gallery items -->
+        <figure class="cursor-pointer overflow-hidden rounded" data-img="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80" data-caption="Summit Sunrise">
+          <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full h-40 object-cover group-hover:scale-105 transition" alt="Summit">
+        </figure>
+        <figure class="cursor-pointer overflow-hidden rounded" data-img="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80" data-caption="Ridge Hike">
+          <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full h-40 object-cover" alt="">
+        </figure>
+        <figure class="cursor-pointer overflow-hidden rounded" data-img="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=1600&q=80" data-caption="Camp Life">
+          <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full h-40 object-cover" alt="">
+        </figure>
+        <figure class="cursor-pointer overflow-hidden rounded" data-img="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c0?auto=format&fit=crop&w=1600&q=80" data-caption="Trail Moment">
+          <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c0?auto=format&fit=crop&w=800&q=80" loading="lazy" class="w-full h-40 object-cover" alt="">
+        </figure>
+      </div>
+    </section>
+
+    <!-- SAFETY & PROCESS -->
+    <section id="safety" class="mt-6 card p-6">
+      <h3 class="font-serif text-xl font-bold">Proses & Keselamatan</h3>
+      <div class="mt-3 grid md:grid-cols-3 gap-4 text-sm text-gray-700">
+        <div class="p-4 border rounded">
+          <h4 class="font-semibold">Before Trip</h4>
+          <p class="mt-2 micro">Pre-trip briefing, gear checklist, medical screening, weather brief.</p>
+        </div>
+        <div class="p-4 border rounded">
+          <h4 class="font-semibold">During Trip</h4>
+          <p class="mt-2 micro">Acclimatization, pace control, safety rope & rescue plan, daily brief.</p>
+        </div>
+        <div class="p-4 border rounded">
+          <h4 class="font-semibold">Emergency</h4>
+          <p class="mt-2 micro">First aid kit, evacuation plan, local rescue contact & satellite comms (on request).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="mt-6 card p-6">
+      <h3 class="font-serif text-xl font-bold">Testimoni</h3>
+      <div class="mt-4 grid md:grid-cols-3 gap-4">
+        <blockquote class="p-4 border-l-4 border-ascGreen italic">"Guide sangat profesional & pengalaman summit sempurna." — Dita</blockquote>
+        <blockquote class="p-4 border-l-4 border-ascGreen italic">"Safety terjamin, makanan & logistik rapi." — Budi</blockquote>
+        <blockquote class="p-4 border-l-4 border-ascGreen italic">"Rekomendasi 100% untuk pendaki pemula & pro." — Lina</blockquote>
+      </div>
+    </section>
+
+    <!-- CONTACT / BOOKING FORM -->
+    <section id="contact" class="mt-6 card p-6 mb-12">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="font-serif text-xl font-bold">Booking & Inquiry</h3>
+          <p class="mt-2 text-sm text-gray-700">Isi form singkat ini — ringkasan akan otomatis dimasukkan ke WhatsApp untuk konfirmasi cepat.</p>
+
+          <form id="bookingForm" class="mt-4 space-y-3">
+            <div>
+              <label class="text-sm">Nama</label>
+              <input id="bName" type="text" class="w-full mt-1 p-3 border rounded" placeholder="Nama lengkap" required>
+            </div>
+            <div>
+              <label class="text-sm">No. WhatsApp</label>
+              <input id="bPhone" type="tel" class="w-full mt-1 p-3 border rounded" placeholder="62xxxxxxxxxx" required>
+            </div>
+            <div>
+              <label class="text-sm">Paket yang diminati</label>
+              <select id="bPackage" class="w-full mt-1 p-3 border rounded">
+                <!-- options via JS -->
+              </select>
+            </div>
+            <div>
+              <label class="text-sm">Tanggal keberangkatan</label>
+              <input id="bDate" type="text" class="w-full mt-1 p-3 border rounded" placeholder="dd-mm-yyyy atau flexible">
+            </div>
+            <div>
+              <label class="text-sm">Catatan / Keterangan</label>
+              <textarea id="bNotes" rows="3" class="w-full mt-1 p-3 border rounded" placeholder="Kebutuhan khusus / kondisi kesehatan"></textarea>
+            </div>
+
+            <div class="flex gap-3">
+              <button id="btnSendWA" type="button" class="bg-ascGreen text-white px-5 py-3 rounded font-semibold">Kirim via WhatsApp</button>
+              <button id="btnDownloadReq" type="button" class="border px-5 py-3 rounded">Download Request</button>
+            </div>
+          </form>
+        </div>
+
+        <aside class="p-4 border rounded">
+          <h4 class="font-semibold">Quick Contact</h4>
+          <p class="micro text-gray-700 mt-2" id="officeInfo"></p>
+          <div class="mt-4">
+            <a id="waQuick" href="#" class="inline-block bg-[#25D366] text-white px-4 py-2 rounded"><i class="fab fa-whatsapp mr-2"></i> Chat via WhatsApp</a>
+          </div>
+          <div class="mt-4">
+            <h5 class="micro font-semibold">Office</h5>
+            <div class="micro text-gray-600 mt-1" id="officeHours">Mon–Sat 08:00–18:00</div>
+            <div class="micro text-gray-600 mt-1" id="officeAddress"></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="fixed inset-0 hidden items-center justify-center z-50 lightbox-bg p-6">
+    <div class="max-w-4xl w-full">
+      <div class="relative bg-white rounded overflow-hidden">
+        <button id="lbClose" class="absolute right-3 top-3 p-2 text-gray-700"><i class="fas fa-times"></i></button>
+        <img id="lbImg" src="" alt="" class="w-full h-[70vh] object-contain bg-black">
+        <div id="lbCaption" class="p-4 text-sm text-gray-700 bg-ascSand"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="text-center micro text-gray-600 pb-8">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="py-6 border-t mt-6">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-3">
+          <div>&copy; <span id="year"></span> ASC Adventure — All rights reserved.</div>
+          <div class="micro">Email: <span id="footEmail"></span> • Address: <span id="footAddress"></span></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT: data, interactions, WhatsApp builder, download -->
+  <script>
+    /* ========== CONFIG ========== */
+    const CONF = window.ASC;
+    document.getElementById('ascLogo').src = CONF.LOGO_URL;
+    document.getElementById('ascName').textContent = CONF.COMPANY_NAME;
+    document.getElementById('officeInfo').innerHTML = `${CONF.EMAIL}<br>WhatsApp: +${CONF.WHATSAPP_NUMBER}`;
+    document.getElementById('officeAddress').textContent = CONF.ADDRESS;
+    document.getElementById('footEmail').textContent = CONF.EMAIL;
+    document.getElementById('footAddress').textContent = CONF.ADDRESS;
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    /* ========== PACKAGE DATA ========== */
+    const PACKAGES = [
+      {
+        id: 'p-rinjani-3d',
+        title_en: 'Rinjani Summit 3D/2N',
+        title_id: 'Rinjani Summit 3H/2M',
+        price: 'IDR 2.500.000',
+        days: '3 days / 2 nights',
+        difficulty: 'Moderate - Challenging',
+        features: ['Guide & porter', 'Tents & meals', 'Permits & transfers'],
+        img: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80',
+        itinerary: 'Day1: Trek to Sembalun Base. Day2: Summit & descent. Day3: Return & transfer.'
+      },
+      {
+        id: 'p-semeru-2d',
+        title_en: 'Semeru Classic 2D/1N',
+        title_id: 'Semeru Classic 2H/1M',
+        price: 'IDR 1.200.000',
+        days: '2 days / 1 night',
+        difficulty: 'Challenging',
+        features: ['Guide', 'Camping gear', 'Meals'],
+        img: 'https://superlive.id/storage/superadventure/2019/03/01/cb143e82fd48.jpg',
+        itinerary: 'Day1: Ranu Pane to Kalimati. Day2: Summit & return.'
+      },
+      {
+        id: 'p-bromo-camp',
+        title_en: 'Bromo Sunrise + Camping',
+        title_id: 'Bromo Sunrise + Camping',
+        price: 'IDR 850.000',
+        days: '1 day with overnight camp',
+        difficulty: 'Easy - Moderate',
+        features: ['Jeep transfer', 'Camp setup', 'Guide'],
+        img: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80',
+        itinerary: 'Evening: Camp & sunset. Early morning: Jeep to viewpoint & sunrise.'
+      }
+    ];
+
+    /* ========== RENDER PACKAGES & SELECTS ========== */
+    const grid = document.getElementById('packageGrid');
+    PACKAGES.forEach(p=>{
+      const div = document.createElement('article');
+      div.className = 'p-4 border rounded hover:shadow-lg transition';
+      div.innerHTML = `
+        <img src="${p.img}" alt="${p.title_en}" class="w-full h-40 object-cover rounded sepia" loading="lazy">
+        <div class="mt-3 flex items-start justify-between">
+          <div>
+            <h4 class="font-semibold">${p.title_en}</h4>
+            <div class="text-sm text-gray-500">${p.days} • ${p.difficulty}</div>
+          </div>
+          <div class="text-right">
+            <div class="font-bold text-ascGreen">${p.price}</div>
+            <div class="text-xs text-gray-500">From</div>
+          </div>
+        </div>
+        <ul class="mt-3 text-sm text-gray-600 space-y-1">
+          ${p.features.map(f => `<li>• ${f}</li>`).join('')}
+        </ul>
+        <div class="mt-4 flex gap-2">
+          <button class="bg-ascGreen text-white px-3 py-2 rounded btnBook" data-id="${p.id}">Booking</button>
+          <button class="border px-3 py-2 rounded btnItin" data-id="${p.id}">Download Itinerary</button>
+        </div>
+      `;
+      grid.appendChild(div);
+    });
+
+    // fill select options
+    const sel = document.getElementById('bPackage');
+    PACKAGES.forEach(p=>{
+      const opt = document.createElement('option');
+      opt.value = p.id;
+      opt.textContent = p.title_en + ' — ' + p.price;
+      sel.appendChild(opt);
+    });
+
+    /* ========== MOBILE MENU ========== */
+    document.getElementById('mobileToggle').addEventListener('click', ()=> {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+
+    /* ========== LIGHTBOX ========== */
+    document.querySelectorAll('figure[data-img]').forEach(fig=>{
+      fig.addEventListener('click', ()=> {
+        const img = fig.dataset.img;
+        const caption = fig.dataset.caption || '';
+        document.getElementById('lbImg').src = img;
+        document.getElementById('lbCaption').textContent = caption;
+        document.getElementById('lightbox').classList.remove('hidden');
+        document.getElementById('lightbox').classList.add('flex');
+      });
+    });
+    document.getElementById('lbClose').addEventListener('click', ()=>{
+      document.getElementById('lightbox').classList.add('hidden');
+      document.getElementById('lightbox').classList.remove('flex');
+      document.getElementById('lbImg').src = '';
+    });
+    document.getElementById('lightbox').addEventListener('click', (e)=>{
+      if(e.target.id === 'lightbox') document.getElementById('lbClose').click();
+    });
+
+    /* ========== ITINERARY DOWNLOAD (per package) ========== */
+    function downloadTextFile(filename, text){
+      const blob = new Blob([text], {type: 'text/plain'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(a.href);
+    }
+    document.querySelectorAll('.btnItin').forEach(btn=>{
+      btn.addEventListener('click', ()=> {
+        const id = btn.dataset.id;
+        const p = PACKAGES.find(x=>x.id===id);
+        if(!p) return;
+        const txt = `ASC Adventure — Itinerary\n\n${p.title_en}\nDuration: ${p.days}\nPrice: ${p.price}\n\nItinerary:\n${p.itinerary}\n\nIncludes: ${p.features.join(', ')}\n\nContact: ${CONF.EMAIL} • WhatsApp: +${CONF.WHATSAPP_NUMBER}`;
+        downloadTextFile(`${p.id}_itinerary.txt`, txt);
+      });
+    });
+
+    // global download button: combined short itinerary
+    document.getElementById('btnDownload').addEventListener('click', ()=>{
+      const lines = [`ASC Adventure — Trip Catalog\nCompany: ${CONF.COMPANY_NAME}`, `Contact: ${CONF.EMAIL} • WhatsApp: +${CONF.WHATSAPP_NUMBER}`, '', 'Packages:'];
+      PACKAGES.forEach(p=>{
+        lines.push(`\n${p.title_en} — ${p.price}`);
+        lines.push(`Duration: ${p.days}`);
+        lines.push(`Itinerary: ${p.itinerary}`);
+      });
+      downloadTextFile('ASC_Adventure_Catalog.txt', lines.join('\n'));
+    });
+    document.getElementById('btnDownloadMobile').addEventListener('click', ()=> document.getElementById('btnDownload').click());
+
+    /* ========== BOOKING: build WA message & download request ========== */
+    function buildBookingMessage(){
+      const name = document.getElementById('bName').value.trim();
+      const phone = document.getElementById('bPhone').value.trim();
+      const pkg = document.getElementById('bPackage').value;
+      const date = document.getElementById('bDate').value.trim();
+      const notes = document.getElementById('bNotes').value.trim();
+      const p = PACKAGES.find(x=>x.id===pkg);
+
+      if(!name || !phone || !pkg) {
+        alert('Please fill Name, WhatsApp number, and selected Package.');
+        return null;
+      }
+
+      let msg = `ASC Adventure - Booking Inquiry\n\nName: ${name}\nWhatsApp: ${phone}\nPackage: ${p ? p.title_en : pkg}\nDate: ${date || '-'}\nNotes: ${notes || '-'}\n\nPlease confirm availability & booking steps. Thank you.`;
+      return msg;
+    }
+
+    document.getElementById('btnSendWA').addEventListener('click', ()=>{
+      const msg = buildBookingMessage();
+      if(!msg) return;
+      const url = `https://wa.me/${CONF.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    });
+
+    document.getElementById('btnDownloadReq').addEventListener('click', ()=>{
+      const msg = buildBookingMessage();
+      if(!msg) return;
+      downloadTextFile('ASC_Booking_Request.txt', msg);
+    });
+
+    // quick booking button in packages
+    document.querySelectorAll('.btnBook').forEach(btn=>{
+      btn.addEventListener('click', ()=> {
+        const id = btn.dataset.id;
+        document.getElementById('bPackage').value = id;
+        // prefill default name placeholder and scroll
+        document.getElementById('bName').focus();
+        window.scrollTo({top: document.getElementById('contact').offsetTop - 80, behavior: 'smooth'});
+      });
+    });
+
+    // quick WA chat
+    document.getElementById('waQuick').addEventListener('click', (e)=>{
+      e.preventDefault();
+      const url = `https://wa.me/${CONF.WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello ASC Adventure, I have a question about your trips.')}`;
+      window.open(url, '_blank');
+    });
+    // hero CTA WA
+    document.getElementById('ctaWA').addEventListener('click', (e)=>{
+      e.preventDefault();
+      const url = `https://wa.me/${CONF.WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello ASC Adventure, I want to book or ask about packages.')}`;
+      window.open(url, '_blank');
+    });
+
+    /* ========== GALLERY LIGHTBOX: enable click on figures ========== */
+    document.querySelectorAll('figure[data-img]').forEach(fig => {
+      fig.addEventListener('click', ()=> {
+        const img = fig.dataset.img;
+        const caption = fig.dataset.caption || '';
+        document.getElementById('lbImg').src = img;
+        document.getElementById('lbCaption').textContent = caption;
+        document.getElementById('lightbox').classList.remove('hidden');
+        document.getElementById('lightbox').classList.add('flex');
+      });
+    });
+
+    /* ========== UX small: lazy load & focus ========== */
+    document.querySelectorAll('img').forEach(i => { if(!i.hasAttribute('loading')) i.setAttribute('loading','lazy'); });
+
+    // mobile menu anchor smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (ev)=>{
+        const href = a.getAttribute('href');
+        if(href.startsWith('#')) {
+          ev.preventDefault();
+          const el = document.querySelector(href);
+          if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+        }
+      });
+    });
+
+    // default: preselect first package
+    document.getElementById('bPackage').value = PACKAGES[0].id;
+  </script>
+</body>
+</html>
